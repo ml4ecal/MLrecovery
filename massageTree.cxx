@@ -73,6 +73,7 @@ void massageTree(TString inputName = "oldtree.root", TString outputName = "newtr
  
   gInterpreter->GenerateDictionary("vector<vector<float> >", "vector");
   gInterpreter->GenerateDictionary("vector<vector<int> >", "vector");
+  gInterpreter->GenerateDictionary("vector<vector<unsigned int> >", "vector");
   
   // setup reading
   
@@ -283,7 +284,8 @@ void massageTree(TString inputName = "oldtree.root", TString outputName = "newtr
     
   
   int entries = oldtree->GetEntries();
-  int nxtals = 616;
+//   int nxtals = 616;
+  int nxtals = 10;
   
   std::cout << " entries = " << entries << std::endl;
   

@@ -241,8 +241,9 @@ void train( TString myMethodList = "", TString outfileName = "TMVAReg.root" ) {
    // Read training and test data (see TMVAClassification for reading ASCII files)
    // load the signal and background event samples from ROOT trees
    TFile *input(0);
-   TString fname = "newfile.root";
-//    if (!gSystem->AccessPathName( fname )) {
+//    TString fname = "newfile.root";
+   TString fname = "added.root";
+   //    if (!gSystem->AccessPathName( fname )) {
    input = TFile::Open( fname ); // check if file in local directory exists
 //    }
 //    else {
