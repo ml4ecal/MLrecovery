@@ -20,3 +20,26 @@ Go to
 and load the notebook
 
 
+
+
+Local
+----
+
+where:
+
+    /home/amassiro/Cern/Code/ECAL/MLrecovery
+
+train:
+
+    r99t massageTree.cxx\(\"output_5.root\",\"newfile.root\"\)
+
+    r99t train.cxx
+    
+    
+    r99t createExample.cxx
+    
+    r99t trainExample.cxx\(\"MLP\",\"testout.root\"\)
+    
+    
+    
+    
