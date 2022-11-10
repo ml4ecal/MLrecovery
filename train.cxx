@@ -161,8 +161,9 @@ void train( TString myMethodList = "", TString outfileName = "TMVAReg.root" ) {
    // note that you may also use variable expressions, such as: "3*var1/var2*abs(var3)"
    // [all types of expressions that can also be parsed by TTree::Draw( "expression" )]
      
-   int nxtals = 616;
-     
+//    int nxtals = 616;
+   int nxtals = 10;
+   
    
    //    
    //    <FATAL>                         : Dataset[dataset] : Target ECAL[20] is constant. Please remove the variable.
@@ -242,7 +243,10 @@ void train( TString myMethodList = "", TString outfileName = "TMVAReg.root" ) {
    // load the signal and background event samples from ROOT trees
    TFile *input(0);
 //    TString fname = "newfile.root";
+//    TString fname = "added.small.root";
    TString fname = "added.root";
+//    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/bmarzocc/ECAL_Recovery_2022/added.root
+   
    //    if (!gSystem->AccessPathName( fname )) {
    input = TFile::Open( fname ); // check if file in local directory exists
 //    }
@@ -276,7 +280,13 @@ void train( TString myMethodList = "", TString outfileName = "TMVAReg.root" ) {
  
    // tell the DataLoader to use all remaining events in the trees after training for testing:
    dataloader->PrepareTrainingAndTestTree( mycut,
-                                         "nTrain_Regression=300:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
+                                         "nTrain_Regression=10000:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
+   
+   //
+   // ---> 10k for training??
+   //
+   
+   
    //
    //     dataloader->PrepareTrainingAndTestTree( mycut,
    //            "nTrain_Regression=0:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );

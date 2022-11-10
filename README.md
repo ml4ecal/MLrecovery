@@ -46,14 +46,18 @@ train:
     r99t -q massageTree.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/bmarzocc/ECAL_Recovery_2022/TEST/JetMET_Run2022D-JetHTJetPlusHOFilter-PromptReco-v2_RAW-RECO/output_5.root\",\"/tmp/amassiro/jetmetnewfile5.root\"\)
 
     
+    r99t train.cxx\(\"MLP\",\"testout.root\"\)
     r99t train.cxx
     
     
     r99t createExample.cxx
     
     r99t trainExample.cxx\(\"MLP\",\"testout.root\"\)
+    r99t trainExample.cxx\(\"BDTG\",\"testout.root\"\) --> no
     
     
+    r99t superMassageTree.cxx\(\"added.root\",\"addedmerged.root\"\)
+
     
 Prepare:
 
