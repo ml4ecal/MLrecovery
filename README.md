@@ -57,6 +57,10 @@ train:
     
     
     r99t superMassageTree.cxx\(\"added.root\",\"addedmerged.root\"\)
+    r99t superMassageTree.cxx\(\"added.root\",\"/media/amassiro/ExWindows/DataCERN/addedmerged.root\"\)
+
+    r99t trainSimple.cxx\(\"MLP\",\"testoutmerged.root\"\)
+
 
     
 Prepare:
