@@ -69,5 +69,10 @@ Prepare:
 
     ls -alrth /eos/cms/store/group/dpg_ecal/alca_ecalcalib/bmarzocc/ECAL_Recovery_2022/EGamma_Run2022D-ZElectron-PromptReco-v2_RechitDumper/ | awk '{print $9}' > list.txt
     
-    est.root
     r99t -q massageTree.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/bmarzocc/ECAL_Recovery_2022/EGamma_Run2022D-ZElectron-PromptReco-v2_RechitDumper/
+    
+    
+    
+    
+    
+    
