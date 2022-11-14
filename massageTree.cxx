@@ -222,6 +222,8 @@ void massageTree(TString inputName = "oldtree.root", TString outputName = "newtr
   newtree->Branch("rho",     &rho,     "rho/F");
   newtree->Branch("nVtx",    &nVtx,    "nVtx/I");
   
+  int ixECAL[616];
+  int iyECAL[616];
   float ECAL[616];
   float ES_plane1[616];
   float ES_plane2[616];
@@ -230,6 +232,8 @@ void massageTree(TString inputName = "oldtree.root", TString outputName = "newtr
   float HCAL_depth3[616];
   float HCAL_depth4[616];
   
+  newtree->Branch("ixECAL",      ixECAL,          "ixECAL[616]/I");
+  newtree->Branch("iyECAL",      iyECAL,          "iyECAL[616]/I");
   newtree->Branch("ECAL",        ECAL,            "ECAL[616]/F");
   newtree->Branch("ES_plane1",   ES_plane1,       "ES_plane1[616]/F");
   newtree->Branch("ES_plane2",   ES_plane2,       "ES_plane2[616]/F");
@@ -292,6 +296,8 @@ void massageTree(TString inputName = "oldtree.root", TString outputName = "newtr
   for (int iEntry = 0; iEntry < entries; iEntry++) {
   
     for (int ixtal=0; ixtal<nxtals; ixtal++) {
+      ixECAL[ixtal] = 0;
+      iyECAL[ixtal] = 0;
       ECAL[ixtal] = 0;
       ES_plane1[ixtal] = 0;
       ES_plane2[ixtal] = 0;
@@ -311,6 +317,8 @@ void massageTree(TString inputName = "oldtree.root", TString outputName = "newtr
       if(valuefound != rawidMasked.end()) {
         int xtalIndex = (int) (valuefound - rawidMasked.begin());
         ECAL       [xtalIndex] = ecalRecHit_energy->at(i);
+        ixECAL     [xtalIndex] = ecalRecHit_ix->at(i);
+        iyECAL     [xtalIndex] = ecalRecHit_iy->at(i);
         
 //         std::cout << " matchedHcalRecHit_energy = " << matchedHcalRecHit_energy << std::endl;
         for (int ihcal = 0; ihcal < matchedHcalRecHit_energy->at(i).size(); ihcal++) {
