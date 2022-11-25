@@ -60,6 +60,7 @@ train:
     r99t superMassageTree.cxx\(\"added.root\",\"/media/amassiro/ExWindows/DataCERN/addedmerged.root\"\)
 
     r99t trainSimple.cxx\(\"MLP\",\"testoutmerged.root\"\)
+    r99t trainSimple.cxx\(\"LD\",\"testoutmerged.root\"\)
 
 
     
@@ -70,6 +71,12 @@ Prepare:
     ls -alrth /eos/cms/store/group/dpg_ecal/alca_ecalcalib/bmarzocc/ECAL_Recovery_2022/EGamma_Run2022D-ZElectron-PromptReco-v2_RechitDumper/ | awk '{print $9}' > list.txt
     
     r99t -q massageTree.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/bmarzocc/ECAL_Recovery_2022/EGamma_Run2022D-ZElectron-PromptReco-v2_RechitDumper/
+    
+    
+Draw:
+
+    mytree->Draw("ES_plane1/ECAL:ECAL >> h\(100, 0, 100, 1000, 0, 0.01\)", "ECAL>1", "colz")
+    
     
     
     

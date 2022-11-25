@@ -166,6 +166,8 @@ void trainSimple( TString myMethodList = "", TString outfileName = "TMVAReg.root
    //    
    
 //    dataloader->AddVariable( "ES_plane1+ES_plane2",   "ES"  , "GeV", 'F' );
+   dataloader->AddVariable( "ixECAL",      "ixECAL"     , "",    'I' );
+   dataloader->AddVariable( "iyECAL",      "iyECAL"     , "",    'I' );
    dataloader->AddVariable( "ES_plane1",   "ES_plane1"  , "GeV", 'F' );
    dataloader->AddVariable( "ES_plane2" ,  "ES_plane2"  , "GeV", 'F' );
    dataloader->AddVariable( "HCAL_depth1", "HCAL_depth1", "GeV", 'F' );
@@ -181,7 +183,7 @@ void trainSimple( TString myMethodList = "", TString outfileName = "TMVAReg.root
    // You can add so-called "Spectator variables", which are not used in the MVA training,
    // but will appear in the final "TestTree" produced by TMVA. This TestTree will contain the
    // input variables, the response values of all trained MVAs, and the spectator variables
-//    dataloader->AddSpectator( "spec1:=ES_plane1",  "Spectator 1", "units", 'F' );
+   dataloader->AddSpectator( "spec1:=ECAL",  "Spectator 1 ECAL", "GeV", 'F' );
 //    dataloader->AddSpectator( "spec2:=ES_plane2",  "Spectator 2", "units", 'F' );
    //    dataloader->AddSpectator( "spec1:=var1*2",  "Spectator 1", "units", 'F' );
    //    dataloader->AddSpectator( "spec2:=var1*3",  "Spectator 2", "units", 'F' );
@@ -231,10 +233,13 @@ void trainSimple( TString myMethodList = "", TString outfileName = "TMVAReg.root
    dataloader->SetWeightExpression( "1", "Regression" );
  
    // Apply additional cuts on the signal and background samples (can be different)
-   TCut mycut = ""; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
- 
+//    TCut mycut = ""; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
+   TCut mycut = "ECAL<50 && ECAL>0.5"; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
+   
    // tell the DataLoader to use all remaining events in the trees after training for testing:
-   dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=10000:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
+//    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=100000:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
+   dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=1000000:nTest_Regression=1000000:SplitMode=Random:NormMode=NumEvents:!V" );
+//    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=1000:nTest_Regression=1000000:SplitMode=Random:NormMode=NumEvents:!V" );
    
    //
    // ---> 10k for training??
