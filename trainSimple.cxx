@@ -234,12 +234,16 @@ void trainSimple( TString myMethodList = "", TString outfileName = "TMVAReg.root
  
    // Apply additional cuts on the signal and background samples (can be different)
 //    TCut mycut = ""; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
-   TCut mycut = "ECAL<50 && ECAL>0.5"; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
+//    TCut mycut = "ECAL<50 && ECAL>0.5"; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
+//    TCut mycut = "ECAL>3.0 && ECAL < 100"; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
+   TCut mycut = "ECAL>2.0 && ECAL < 20.0"; // for example: TCut mycut = "abs(var1)<0.5 && abs(var2-0.5)<1";
    
    // tell the DataLoader to use all remaining events in the trees after training for testing:
 //    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=100000:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
-   dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=1000000:nTest_Regression=1000000:SplitMode=Random:NormMode=NumEvents:!V" );
-//    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=1000:nTest_Regression=1000000:SplitMode=Random:NormMode=NumEvents:!V" );
+//    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=10000:nTest_Regression=50000:SplitMode=Random:NormMode=NumEvents:!V" );
+   dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=40000:nTest_Regression=50000:SplitMode=Random:NormMode=NumEvents:!V" );
+   //    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=1000000:nTest_Regression=1000000:SplitMode=Random:NormMode=NumEvents:!V" );
+   //    dataloader->PrepareTrainingAndTestTree( mycut, "nTrain_Regression=1000:nTest_Regression=1000000:SplitMode=Random:NormMode=NumEvents:!V" );
    
    //
    // ---> 10k for training??
@@ -338,12 +342,16 @@ void trainSimple( TString myMethodList = "", TString outfileName = "TMVAReg.root
    // Boosted Decision Trees
    if (Use["BDT"])
      factory->BookMethod( dataloader,  TMVA::Types::kBDT, "BDT",
-                           "!H:!V:NTrees=100:MinNodeSize=1.0%:BoostType=AdaBoostR2:SeparationType=RegressionVariance:nCuts=20:PruneMethod=CostComplexity:PruneStrength=30" );
- 
+                          "!H:!V:NTrees=100:MinNodeSize=1.0%:BoostType=AdaBoostR2:SeparationType=RegressionVariance:nCuts=20:PruneMethod=CostComplexity:PruneStrength=30" );
+//                           "!H:!V:NTrees=400:MinNodeSize=1.0%:BoostType=AdaBoostR2:SeparationType=RegressionVariance:nCuts=20:PruneMethod=CostComplexity:PruneStrength=30" );
+//                           "!H:!V:NTrees=100:MinNodeSize=1.0%:BoostType=AdaBoostR2:SeparationType=RegressionVariance:nCuts=20:PruneMethod=CostComplexity:PruneStrength=30" );
+
    if (Use["BDTG"])
      factory->BookMethod( dataloader,  TMVA::Types::kBDT, "BDTG",
-                           "!H:!V:NTrees=2000::BoostType=Grad:Shrinkage=0.1:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=3:MaxDepth=4" );
-   // --------------------------------------------------------------------------------------------------
+//                           "!H:!V:NTrees=2000::BoostType=Grad:Shrinkage=0.1:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=3:MaxDepth=4" );
+//                           "!H:!V:NTrees=2000::BoostType=Grad:Shrinkage=0.1:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=7" );
+                             "!H:!V:NTrees=2000::BoostType=Grad:Shrinkage=0.1:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=50:MaxDepth=8" );
+// --------------------------------------------------------------------------------------------------
  
    // Now you can tell the factory to train, test, and evaluate the MVAs
  

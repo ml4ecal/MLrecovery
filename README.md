@@ -60,8 +60,14 @@ train:
     r99t superMassageTree.cxx\(\"added.root\",\"/media/amassiro/ExWindows/DataCERN/addedmerged.root\"\)
 
     r99t trainSimple.cxx\(\"MLP\",\"testoutmerged.root\"\)
+    r99t trainSimple.cxx\(\"BDT\",\"testoutmerged.root\"\)
     r99t trainSimple.cxx\(\"LD\",\"testoutmerged.root\"\)
 
+    r99t trainSimple.cxx\(\"BDTG\",\"testoutmerged.root\"\)
+    
+    
+    
+    
 
     
 Prepare:
@@ -75,7 +81,9 @@ Prepare:
     
 Draw:
 
+    r99t addedmerged.root
     mytree->Draw("ES_plane1/ECAL:ECAL >> h\(100, 0, 100, 1000, 0, 0.01\)", "ECAL>1", "colz")
+    mytree->Draw("ixECAL:iyECAL", "ECAL>1", "colz")
     
     
     

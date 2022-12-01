@@ -55,6 +55,8 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
   oldtree->SetBranchAddress("nVtx", &nVtx, &b_nVtx);
  
   float ECAL[616];
+  int ixECAL[616];
+  int iyECAL[616];
   float ES_plane1[616];
   float ES_plane2[616];
   float HCAL_depth1[616];
@@ -63,6 +65,8 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
   float HCAL_depth4[616];
   
   oldtree->SetBranchAddress("ECAL",        ECAL        );
+  oldtree->SetBranchAddress("ixECAL",      ixECAL      );
+  oldtree->SetBranchAddress("iyECAL",      iyECAL      );
   oldtree->SetBranchAddress("ES_plane1",   ES_plane1   );
   oldtree->SetBranchAddress("ES_plane2",   ES_plane2   );
   oldtree->SetBranchAddress("HCAL_depth1", HCAL_depth1 );
@@ -93,6 +97,8 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
   newtree->Branch("nVtx",    &nVtx,    "nVtx/I");
   
   float all_ECAL;
+  int   all_ixECAL;
+  int   all_iyECAL;
   float all_ES_plane1;
   float all_ES_plane2;
   float all_HCAL_depth1;
@@ -101,6 +107,8 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
   float all_HCAL_depth4;
   
   newtree->Branch("ECAL",        &all_ECAL,            "ECAL/F");
+  newtree->Branch("ixECAL",      &all_ixECAL,          "ixECAL/I");
+  newtree->Branch("iyECAL",      &all_iyECAL,          "iyECAL/I");
   newtree->Branch("ES_plane1",   &all_ES_plane1,       "ES_plane1/F");
   newtree->Branch("ES_plane2",   &all_ES_plane2,       "ES_plane2/F");
   newtree->Branch("HCAL_depth1", &all_HCAL_depth1,     "HCAL_depth1/F");
@@ -117,6 +125,8 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
   for (int iEntry = 0; iEntry < entries; iEntry++) {
     
     all_ECAL = 0;
+    all_ixECAL = 0;
+    all_iyECAL = 0;
     all_ES_plane1 = 0;
     all_ES_plane2 = 0;
     all_HCAL_depth1 = 0;
@@ -131,6 +141,8 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
     for (int ixtal=0; ixtal<nxtals; ixtal++) {
       if (ECAL[ixtal] > 0) {
         all_ECAL =          ECAL        [ixtal];     
+        all_ixECAL =        ixECAL      [ixtal];     
+        all_iyECAL =        iyECAL      [ixtal];     
         all_ES_plane1 =     ES_plane1   [ixtal];
         all_ES_plane2 =     ES_plane2   [ixtal];
         all_HCAL_depth1 =   HCAL_depth1 [ixtal];
@@ -138,8 +150,13 @@ void superMassageTree(TString inputName = "oldtree.root", TString outputName = "
         all_HCAL_depth3 =   HCAL_depth3 [ixtal];
         all_HCAL_depth4 =   HCAL_depth4 [ixtal];
         newtree->Fill();    
-        if (ES_plane1   [ixtal] >0 ) std::cout << " iEntry = " << iEntry << " :: " << entries << " ES_plane1   [" << ixtal << "] = " << ES_plane1   [ixtal] << std::endl;
-        if (ES_plane2   [ixtal] >0 ) std::cout << " iEntry = " << iEntry << " :: " << entries << " ES_plane2   [" << ixtal << "] = " << ES_plane2   [ixtal] << std::endl;
+        
+//         
+//         std::cout << " ixECAL      [ " << ixtal << " ] = " << ixECAL      [ixtal] << " ; iyECAL      [ " << ixtal << " ] = " << iyECAL      [ixtal] << std::endl;
+//         
+//         if (ES_plane1   [ixtal] >0 ) std::cout << " iEntry = " << iEntry << " :: " << entries << " ES_plane1   [" << ixtal << "] = " << ES_plane1   [ixtal] << std::endl;
+//         if (ES_plane2   [ixtal] >0 ) std::cout << " iEntry = " << iEntry << " :: " << entries << " ES_plane2   [" << ixtal << "] = " << ES_plane2   [ixtal] << std::endl;
+        
       }
     }     
   }
