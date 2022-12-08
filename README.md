@@ -66,7 +66,8 @@ train:
     r99t trainSimple.cxx\(\"BDTG\",\"testoutmerged.root\"\)
     
     
-    
+    r99t addRegressionSimple.cxx\(\"addedmerged.root\",\"/media/amassiro/ExWindows/DataCERN/regression_addedmerged.root\",\"newECAL\",\"dataset/weights/TMVARegression_BDTG.weights.xml\"\)
+
     
 
     
