@@ -183,7 +183,7 @@ void trainSimple( TString myMethodList = "", TString outfileName = "TMVAReg.root
    // You can add so-called "Spectator variables", which are not used in the MVA training,
    // but will appear in the final "TestTree" produced by TMVA. This TestTree will contain the
    // input variables, the response values of all trained MVAs, and the spectator variables
-   dataloader->AddSpectator( "spec1:=ECAL",  "Spectator 1 ECAL", "GeV", 'F' );
+//    dataloader->AddSpectator( "spec1:=ECAL",  "Spectator 1 ECAL", "GeV", 'F' );
 //    dataloader->AddSpectator( "spec2:=ES_plane2",  "Spectator 2", "units", 'F' );
    //    dataloader->AddSpectator( "spec1:=var1*2",  "Spectator 1", "units", 'F' );
    //    dataloader->AddSpectator( "spec2:=var1*3",  "Spectator 2", "units", 'F' );

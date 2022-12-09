@@ -11,6 +11,16 @@ void addRegressionSimple( TString inputFile = "bla.root",   TString outputFile =
   // - the variable names must corresponds in name and type to
   // those given in the weight file(s) that you use
   
+  float val_ECAL;
+  float val_ixECAL;
+  float val_iyECAL;
+  float val_ES_plane1;
+  float val_ES_plane2;
+  float val_HCAL_depth1;
+  float val_HCAL_depth2;
+  float val_HCAL_depth3;
+  float val_HCAL_depth4;
+
   float ECAL;
   int   ixECAL;
   int   iyECAL;
@@ -21,25 +31,25 @@ void addRegressionSimple( TString inputFile = "bla.root",   TString outputFile =
   float HCAL_depth3;
   float HCAL_depth4;
   
-  reader->AddVariable(( "ixECAL",      &ixECAL      );
-  reader->AddVariable(( "iyECAL",      &iyECAL      );
-  reader->AddVariable(( "ES_plane1",   &ES_plane1   );
-  reader->AddVariable(( "ES_plane2" ,  &ES_plane2   );
-  reader->AddVariable(( "HCAL_depth1", &HCAL_depth1 );
-  reader->AddVariable(( "HCAL_depth2", &HCAL_depth2 );
-  reader->AddVariable(( "HCAL_depth3", &HCAL_depth3 );
-  reader->AddVariable(( "HCAL_depth4", &HCAL_depth4 );
+  reader->AddVariable( "ixECAL",      &val_ixECAL      );
+  reader->AddVariable( "iyECAL",      &val_iyECAL      );
+  reader->AddVariable( "ES_plane1",   &val_ES_plane1   );
+  reader->AddVariable( "ES_plane2" ,  &val_ES_plane2   );
+  reader->AddVariable( "HCAL_depth1", &val_HCAL_depth1 );
+  reader->AddVariable( "HCAL_depth2", &val_HCAL_depth2 );
+  reader->AddVariable( "HCAL_depth3", &val_HCAL_depth3 );
+  reader->AddVariable( "HCAL_depth4", &val_HCAL_depth4 );
   
   
   // book the MVA of your choice (prior training of these methods, ie,
   // existence of the weight files is required)
-  reader->BookMVA( variableName.Data(),  txtFile.Data() );
+  reader->BookMVA( "ECAL",  txtFile.Data() );
  
  
   TFile* oldfile = new TFile (inputFile.Data(), "READ");   
   TTree* oldtree = (TTree*) oldfile -> Get ("mytree");
   
-  Long64_t        eventId;
+  Int_t           eventId;
   Int_t           lumiId;
   Int_t           runId;
   Float_t         rho;
@@ -104,9 +114,22 @@ void addRegressionSimple( TString inputFile = "bla.root",   TString outputFile =
     
     oldtree->GetEntry(ievt);
     
-    // retrieve the corresponding MVA output
-    ECAL_regressed = reader->EvaluateMVA( "BDTG method"    );
+    val_ECAL =         ECAL;
+    val_ixECAL =       ixECAL;
+    val_iyECAL =       iyECAL;
+    val_ES_plane1 =    ES_plane1;
+    val_ES_plane2 =    ES_plane2;
+    val_HCAL_depth1 =  HCAL_depth1;
+    val_HCAL_depth2 =  HCAL_depth2;
+    val_HCAL_depth3 =  HCAL_depth3;
+    val_HCAL_depth4 =  HCAL_depth4;
     
+    
+    // retrieve the corresponding MVA output
+    double temporal = reader->EvaluateMVA( "BDTG"    );
+//     double temporal = reader->EvaluateMVA( "BDTG method"    );
+    
+    ECAL_regressed = temporal;
     newtree->Fill();
     
   } // end of event loop
