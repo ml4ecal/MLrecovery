@@ -43,8 +43,9 @@ void addRegressionSimple( TString inputFile = "bla.root",   TString outputFile =
   
   // book the MVA of your choice (prior training of these methods, ie,
   // existence of the weight files is required)
-  reader->BookMVA( "ECAL",  txtFile.Data() );
- 
+//   reader->BookMVA( "ECAL",  txtFile.Data() );
+  reader->BookMVA( "BDTG",  txtFile.Data() );
+  
  
   TFile* oldfile = new TFile (inputFile.Data(), "READ");   
   TTree* oldtree = (TTree*) oldfile -> Get ("mytree");
@@ -124,9 +125,11 @@ void addRegressionSimple( TString inputFile = "bla.root",   TString outputFile =
     val_HCAL_depth3 =  HCAL_depth3;
     val_HCAL_depth4 =  HCAL_depth4;
     
+    if ((ievt%1000) == 0) std::cout << " ievt = " << ievt << " :: " << oldtree->GetEntries() << std::endl;
     
     // retrieve the corresponding MVA output
     double temporal = reader->EvaluateMVA( "BDTG"    );
+//     double temporal = reader->EvaluateMVA( "BDTG"    );
 //     double temporal = reader->EvaluateMVA( "BDTG method"    );
     
     ECAL_regressed = temporal;
